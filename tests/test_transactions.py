@@ -17,7 +17,7 @@ def test_init_transactions_class_with_defaults():
     assert trxs._dust == trxs._service._min_dust
 
 
-@pytest.mark.skipif(os.environ.get('TRAVIS'),
+@pytest.mark.skipif(os.environ.get('TRAVIS') == 'true',
                     reason='sslv3 alert handshake failure')
 def test_transaction_creation_via_simple_transaction():
     from transactions import Transactions
