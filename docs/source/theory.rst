@@ -33,6 +33,23 @@ Bitcoin Network
         protocol
 
 
+Decentralization
+================
+
+Distributed Consensus
+=====================
+
+
+The Blockchain
+==============
+
+
+
+Proof-of-Work
+=============
+
+
+
 
 .. _bitcoin-addresses:
 
@@ -56,7 +73,7 @@ Bitcoin Transactions
 .. todo:: Explain what bitcoin transactions are.
     
     Keywords:
-        signature, validation, double spend
+        signature, validation, double spend, block creation
 
 
 
@@ -71,3 +88,25 @@ Computer Science of Bitcoin
 
     Keywords: 
         hash functions, hash pointers, linked lists, binary tress, crypto
+
+
+
+Cryptographic Hash Functions
+============================
+
+Hash Pointer -based Data Structures
+===================================
+
+Digital Signatures
+==================
+
+
+Public/Private Key Pairs as Identities
+======================================
+
+
+Two simple Cryptocurrency Models
+================================
+
+
+
