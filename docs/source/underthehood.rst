@@ -100,7 +100,7 @@ given the following ``bitcoin.conf``:
 
 .. code-block::
     
-    curl --user a:b --data-binary '{"jsonrpc": "1.0", "id":"", "method": "getinfo", "params": [] }' -H 'content-type: text/plain;' http://<sender_ip<:58332
+    curl --user a:b --data-binary '{"jsonrpc": "1.0", "id":"", "method": "getinfo", "params": [] }' -H 'content-type: text/plain;' http://<sender_ip>:58332
 
 
 container-container
