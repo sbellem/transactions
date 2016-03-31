@@ -94,11 +94,12 @@ given the following ``bitcoin.conf``:
     rpcallowip=<sender_ip>
 
 
-.. code-block::
+.. code-block:: bash
     
     docker run --rm --name btc -v ~/.bitcoin-docker:/root/.bitcoin -p <sender_ip>:58332:18332 btc5 bitcoind -regtest -printtoconsole
 
-.. code-block::
+
+.. code-block:: bash
     
     curl --user a:b --data-binary '{"jsonrpc": "1.0", "id":"", "method": "getinfo", "params": [] }' -H 'content-type: text/plain;' http://<sender_ip>:58332
 

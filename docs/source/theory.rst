@@ -12,7 +12,7 @@ In order to present the information, we'll use the same three pillars as in
 * :ref:`bitcoin-addresses`
 * :ref:`bitcoin-transactions`
 
-In addition to the above three pillars, we'll add a more theroretical section
+In addition to the above three pillars, we'll add a more theoretical section
 involving cryptography, data structures, and algorithms.
 
 * :ref:`computer-science-of-bitcoin`
@@ -82,20 +82,107 @@ Bitcoin Transactions
 ***************************
 Computer Science of Bitcoin
 ***************************
+The goal of this section is to dwell on the fundamentals of bitcoin from the
+point of view of data structures and algorithms.
 
-.. todo:: Dwell on the fundamentals of bitcoin from the point of view of data
-    structures and algorithms.
+Some key concepts are: hash functions, hash pointers, linked lists,
+binary tress, cryptography.
 
-    Keywords: 
-        hash functions, hash pointers, linked lists, binary tress, crypto
+As a starting point the material therein is currently heavily inspired by the
+draft version of the book `Bitcoin and Cryptocurrency Technologies`_ by
 
+    * `Arvind Narayanan <http://randomwalker.info/>`_, Princeton University
+    * `Joseph Bonneau <http://jbonneau.com/>`_, Princeton University
+    * `Edward Felten <https://www.cs.princeton.edu/~felten/>`_, Princeton University
+    * `Andrew Miller <https://cs.umd.edu/~amiller/>`_, University of Maryland
+    * `Steven Goldfeder <https://www.cs.princeton.edu/~stevenag/>`_, Princeton University
+    * `Jeremy Clark <http://users.encs.concordia.ca/~clark/>`_, Concordia University
+
+.. _Bitcoin and Cryptocurrency Technologies: https://d28rh4a8wq0iu5.cloudfront.net/bitcointech/readings/princeton_bitcoin_book.pdf
+
+The long term intention is to extend the material as much as it makes sense
+meanwhile keeping a connection to the engineering side of bitcoin.
 
 
 Cryptographic Hash Functions
 ============================
+Very briefly, a basic hash function has three main characteristics:
+
+* input value is a string of any size
+* output value is of fixed size (i.e.: 256 bits)
+* for a string of n bits, the hash function has a running time of O(n)
+
+.. note;; The output value of hash function is also called the hash.
+
+This is more or less good enough to implement a hash table.
+
+In order to make the basic hash function cryptographically secure, three
+additional characteristics are required:
+
+* collision‐resistance
+* hiding
+* puzzle‐friendliness
+
+A hash collition means that for two different input strings the hash function
+returns the same hash.
+
+Hash functions have collisions since the number of possible inputs is infinite
+whereas the number of possible outputs is finite.
+
+collision‐resistance
+  A hash function is collision-resistant if it is not possible to find its
+  collisions.
+
+hiding
+  Reverse engineering a hash function is not possible. That is, given the hash
+  of a hash function, the input string cannot be found.
+
+puzzle‐friendliness
+  Very roughly this means that one can pick a puzzle id, k, and bind it to a
+  target result y, such that it is difficult to find a value x, which when fed
+  to the hash function in combination with k, will yield y. By difficult, is
+  meant that there are no better approaches than random trials, and that
+  finding x requires substantial time, more than 2^n for if y has n bits.
+
+
+Hash function in use in Bitcoin
+-------------------------------
+Several cryptocurrencies like Bitcoin use SHA-256 for verifying transactions
+and calculating proof-of-work or proof-of-stake. [#sha256_bitcoin]_
+
+For a more in-depth study of SHA-256 one may consult
+`Descriptions of SHA-256, SHA-384, and SHA-512`_ by NIST.
+
+
 
 Hash Pointer -based Data Structures
 ===================================
+A hash pointer, points to a location where data is stored along, with the hash
+of that data at a given point in time.
+
+Using a hash pointer one can retrieve the data, and verify that the data hasn't
+changed.
+
+Using hash pointers, one can build various pointer-based acyclic data
+structures such as linked lists, trees, and more generally directed acyclic
+graphs.
+
+The bitcoin blockchain can be viewed as a linked list of binary trees, relying
+on hash pointers. The hash pointer -based linked list is more precisely called
+a hash chain, whereas the hash pointer -based binary tree is called a hash
+tree, or `Merkle tree`_, named after its inventor `Ralph Merkle`_.
+
+The hash tree is used to store blocks of transactions, meanwhile the hash
+chain is used to link the blocks together.
+
+.. note:: Binary hash trees make it relatively efficient to show the chain of
+    transactions a transaction is linked to within a tree. For a tree with n
+    transactions, only about log(n) transactions are necessary.
+
+
+.. _merkle tree: https://en.wikipedia.org/wiki/Merkle_tree
+.. _ralph merkle: https://en.wikipedia.org/wiki/Ralph_Merkle
+
 
 Digital Signatures
 ==================
@@ -108,5 +195,14 @@ Public/Private Key Pairs as Identities
 Two simple Cryptocurrency Models
 ================================
 
+**********
+References
+**********
+
+.. [#sha256_bitcoin] https://en.wikipedia.org/wiki/SHA-2#Applications
 
 
+
+.. _Descriptions of SHA-256, SHA-384, and SHA-512:  https://web.archive.org/web/20130526224224/http://csrc.nist.gov/groups/STM/cavp/documents/shs/sha256-384-512.pdf
+.. _merkle tree: https://en.wikipedia.org/wiki/Merkle_tree
+.. _ralph merkle: https://en.wikipedia.org/wiki/Ralph_Merkle

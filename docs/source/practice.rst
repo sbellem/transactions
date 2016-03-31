@@ -25,7 +25,7 @@ docker
 host - container
 ----------------
 
-Runnign bitcoind in container and making rpc calls to it from the host machine,
+Running bitcoind in container and making rpc calls to it from the host machine,
 (sender_ip)
 
 given the following ``bitcoin.conf``:
@@ -44,11 +44,6 @@ given the following ``bitcoin.conf``:
 .. code-block::
 
     curl --user a:b --data-binary '{"jsonrpc": "1.0", "id":"", "method": "getinfo", "params": [] }' -H 'content-type: text/plain;' http://<sender_ip>:58332
-
-
-container-container
--------------------
-Making rpc calls from a container to the bitcoind running in another container.
 
 
 
