@@ -1,3 +1,8 @@
+import os
+
+import pytest
+
+
 def test_bitcoin_service_attributes():
     from transactions.services.service import BitcoinService
     assert BitcoinService._min_dust == 3000
@@ -19,6 +24,8 @@ def test_bitcoin_service_init_testnet():
     assert bitcoin_service.name == BitcoinService.__name__ + 'Testnet'
 
 
+@pytest.mark.skipif(os.environ.get('TRAVIS') == 'true',
+                    reason='need to install, config, & run bitcoin on travis')
 def test_make_request():
     from transactions.services.daemonservice import BitcoinDaemonService
     s = BitcoinDaemonService('a', 'b', 'bitcoin', 18332)
