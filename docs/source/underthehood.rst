@@ -87,7 +87,7 @@ Runnign bitcoind in container and making rpc calls to it from the host machine,
 
 given the following ``bitcoin.conf``:
 
-.. code-block::
+.. code-block:: bash
 
     dnsseed=0
     rpcuser=a
