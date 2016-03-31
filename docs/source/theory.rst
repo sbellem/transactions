@@ -85,8 +85,12 @@ Computer Science of Bitcoin
 The goal of this section is to dwell on the fundamentals of bitcoin from the
 point of view of data structures and algorithms.
 
-Some key concepts are: hash functions, hash pointers, linked lists,
-binary tress, cryptography.
+Some of the key concepts are:
+
+    * secure hash functions
+    * hash pointers and pointer-based acyclic data structures
+    * digital signatures
+    * cryptocurrencies
 
 As a starting point the material therein is currently heavily inspired by the
 draft version of the book `Bitcoin and Cryptocurrency Technologies`_ by
@@ -186,14 +190,59 @@ chain is used to link the blocks together.
 
 Digital Signatures
 ==================
+A digital signature requires three steps:
+
+* private / public key pair generation
+* signature
+* verification
+
+Expressed in code:
+
+.. code-block:: python
+
+    private_key, public_key = generate_key_pair(key_size, passphrase=None)
+
+    signature = sign(private_key, message)
+
+    is_valid = verify(public_key, message, signature)
+
+There are two important requirements, one somewhat obvious, and the other more
+complex.
+
+* Valid signatures must verify. That is:
+
+.. code-block:: python
+
+    verify(public_key, message, sign(private_key, message)) is True
+
+* Reverse engineering the digital signature scheme, aka forging signatures
+  is computationally impossible. That is, for any given message for which the
+  the signature, and public key are known, it is not possible to find the
+  private key, or to figure out how to create new valid signatures for
+  different messages.
 
 
-Public/Private Key Pairs as Identities
-======================================
+Digital signature used in Bitcoin
+---------------------------------
+For its digital signatures Bitcoin uses the Elliptic Curve Digital Signature
+Algorithm (`ECDSA`_).
+
+.. _ecdsa: https://en.wikipedia.org/wiki/Elliptic_Curve_Digital_Signature_Algorithm
+
+
+Public Keys as Identities & Bitcoin Addresses
+---------------------------------------------
+Using a digital signature scheme, public keys can be used as identities. In
+Bitcoin, public keys are used to identify the sender and receiver in a
+transaction. Bitcoin refers to these public keys as "addresses". The sender
+can sign the transaction with their private key, meanwhile the receiver can
+verify the signature of the transaction using the public key of the sender.
 
 
 Two simple Cryptocurrency Models
 ================================
+
+
 
 **********
 References
