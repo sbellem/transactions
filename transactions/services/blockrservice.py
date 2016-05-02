@@ -32,11 +32,14 @@ class BitcoinBlockrService(BitcoinService):
                                                           data['message']))
         return data['data']
 
-    def list_transactions(self, address, **kwargs):
+    def list_transactions(self, address, raw=False, **kwargs):
         # blockr returns the last 200 transactions
         path = '/address/txs/{}'.format(address)
         url = self._url + path
         results = self.make_request(url)
+
+        if raw:
+            return results
 
         out = []
         for tx in results['txs']:
@@ -64,19 +67,23 @@ class BitcoinBlockrService(BitcoinService):
                             'confirmations': unspent['confirmations']})
         return out
 
-    def get_transaction(self, txid):
+    def get_transaction(self, txid, raw=False):
         path = '/tx/info/{}'.format(txid)
         url = self._url + path
         tx = self.make_request(url)
+        if raw:
+            return tx
         result = self._construct_transaction(tx)
         return result
 
-    def push_tx(self, tx_signed):
+    def push_tx(self, tx_signed, raw=False):
         # push transactions requires a post to blockr
         path = '/tx/push'
         url = self._url + path
         payload = {'hex': tx_signed}
         response = requests.post(url, data=payload)
+        if raw:
+            return response
         return pybitcointools.txhash(tx_signed)
 
     def _convert_time(self, time_str):

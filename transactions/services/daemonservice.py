@@ -131,8 +131,10 @@ class BitcoinDaemonService(BitcoinService):
         raw_transaction = response.get('result')
         return raw_transaction
 
-    def get_transaction(self, txid):
+    def get_transaction(self, txid, raw=False):
         raw_tx = self.get_raw_transaction(txid)
+        if raw:
+            return raw_tx
         result = self._construct_transaction(raw_tx)
         return result
 
