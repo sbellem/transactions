@@ -59,7 +59,7 @@ class Transactions(object):
         self._service.push_tx(tx)
         return pybitcointools.txhash(tx)
 
-    def get(self, hash, account="*", max_transactions=100, min_confirmations=6):
+    def get(self, hash, account="*", max_transactions=100, min_confirmations=6, raw=False):
         """
         Args:
             hash: can be a bitcoin address or a transaction id. If it's a
@@ -79,7 +79,7 @@ class Transactions(object):
             unspents = self._service.list_unspents(hash, min_confirmations=min_confirmations)
             return {'transactions': txs, 'unspents': unspents}
         else:
-            return self._service.get_transaction(hash)
+            return self._service.get_transaction(hash, raw=raw)
 
     def import_address(self, address, account="", rescan=False):
         if self._service.name.startswith('BitcoinDaemonService') or \
