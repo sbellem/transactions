@@ -209,3 +209,29 @@ class Transactions(object):
         if self._service != 'blockr':
             raise NotImplementedError('Currently only supported for "blockr.io"')
         return self._service.decode(tx)
+
+    def get_block_raw(self, block):
+        """
+        Args:
+            block: block number (eg: 223212)
+                block hash (eg: 0000000000000000210b10d620600dc1cc2380bb58eb2408f9767eb792ed31fa)
+                word "last" - this will always return the latest block
+                word "first" - this will always return the first block
+        Returns:
+            raw block data
+
+        """
+        return self._service.get_block_raw(block)
+
+    def get_block_info(self, block):
+        """
+        Args:
+            block: block number (eg: 223212)
+                block hash (eg: 0000000000000000210b10d620600dc1cc2380bb58eb2408f9767eb792ed31fa)
+                word "last" - this will always return the latest block
+                word "first" - this will always return the first block
+        Returns:
+            basic block data
+
+        """
+        return self._service.get_block_info(block)

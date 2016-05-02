@@ -122,3 +122,31 @@ class BitcoinBlockrService(BitcoinService):
         url = self._url + '/tx/decode'
         data = {'hex': tx}
         return requests.post(url, data=data)
+
+    def get_block_raw(self, block):
+        """
+        Args:
+            block: block number (eg: 223212)
+                block hash (eg: 0000000000000000210b10d620600dc1cc2380bb58eb2408f9767eb792ed31fa)
+                word "last" - this will always return the latest block
+                word "first" - this will always return the first block
+        Returns:
+            raw block data
+
+        """
+        url = '{}/block/raw/{}'.format(self._url, block)
+        return self.make_request(url)
+
+    def get_block_info(self, block):
+        """
+        Args:
+            block: block number (eg: 223212)
+                block hash (eg: 0000000000000000210b10d620600dc1cc2380bb58eb2408f9767eb792ed31fa)
+                word "last" - this will always return the latest block
+                word "first" - this will always return the first block
+        Returns:
+            basic block data
+
+        """
+        url = '{}/block/info/{}'.format(self._url, block)
+        return self.make_request(url)
