@@ -193,3 +193,19 @@ class Transactions(object):
         # estimates transaction fee based on number of inputs and outputs
         estimated_size = 10 + 148 * n_inputs + 34 * n_outputs
         return (estimated_size / 1000 + 1) * self._min_tx_fee
+
+    def decode(self, tx):
+        """
+        Decodes the given transaction.
+
+        Args:
+            tx: hex of transaction
+        Returns:
+            decoded transaction
+
+        .. note:: Only supported for blockr.io at the moment.
+
+        """
+        if self._service != 'blockr':
+            raise NotImplementedError('Currently only supported for "blockr.io"')
+        return self._service.decode(tx)

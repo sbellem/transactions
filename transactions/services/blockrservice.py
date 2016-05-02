@@ -117,3 +117,8 @@ class BitcoinBlockrService(BitcoinService):
         param label= account name to use
         """
         pass
+
+    def decode(self, tx):
+        url = self._url + '/tx/decode'
+        data = {'hex': tx}
+        return requests.post(url, data=data)
