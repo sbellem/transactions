@@ -66,6 +66,12 @@ class BitcoinDaemonService(BitcoinService):
     def getbalance(self):
         return self.make_request('getbalance')
 
+    def get_new_address(self):
+        return self.make_request('getnewaddress')
+
+    def send_to_address(self, address, amount):
+        return self.make_request('sendtoaddress', params=(address, amount))
+
     def push_tx(self, tx):
         """
 
