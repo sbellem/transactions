@@ -235,3 +235,8 @@ class Transactions(object):
 
         """
         return self._service.get_block_info(block)
+
+
+    # To simplify a bit the method names
+    create = simple_transaction
+    sign = sign_transaction
