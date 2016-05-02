@@ -24,7 +24,7 @@ class BitcoinBlockrService(BitcoinService):
         else:
             return 'https://btc.blockr.io/api/v1'
 
-    def make_request(self, url):
+    def make_request(self, url, params=None):
         response = requests.get(url)
         data = json.loads(response.content)
         if data.get('status') != 'success':
@@ -117,6 +117,14 @@ class BitcoinBlockrService(BitcoinService):
         param label= account name to use
         """
         pass
+
+    def get_balance(self, addresses, confirmations=None):
+        # TODO review
+        if not isinstance(addresses, str):
+            addresses = ','.join(addresses)
+        url = '{}/address/balance/{}'.format(self._url, addresses)
+        # TODO add support for confirmations
+        return self.make_request(url)
 
     def decode(self, tx):
         url = self._url + '/tx/decode'
