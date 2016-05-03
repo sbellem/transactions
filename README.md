@@ -41,9 +41,18 @@ https://transactions.readthedocs.org/
 
 
 ## Contributing
-Pull requests, feedback, suggestions are welcome.
+Pull requests, feedback, and suggestions are welcome. Github repository is at 
+https://github.com/ascribe/transactions
 
-<rodolphe@ascribe.io>
+You can also send inquiries directly to devel@ascribe.io
+
+
+### Things to be done
+
+* Tests
+* Implementing ``bitcoin-cli`` commands (e.g.; ``keypoolrefill``)
+* Documenting
+
 
 ## Background
 This was developed by ascribe GmbH as part of the overall ascribe technology stack. http://www.ascribe.io
