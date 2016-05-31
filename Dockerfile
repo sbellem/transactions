@@ -9,5 +9,6 @@ RUN pip install --upgrade pip
 COPY . /usr/src/app
 
 RUN pip install -e .[dev]
+RUN pip install codecov
 
 CMD ["py.test", "-v", "tests/"]
