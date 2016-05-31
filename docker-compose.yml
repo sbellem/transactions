@@ -5,6 +5,8 @@ services:
     build: .
     volumes:
       - .:/usr/src/app
+    environment:
+      BITCOIN_HOST: bitcoin
     command: py.test -v
   bitcoin:
     image: ascribe/bitcoin
