@@ -45,6 +45,7 @@ tests_require = [
     'pylint',
     'pytest',
     'pytest-cov',
+    'python-bitcoinrpc>=0.3.1',
 ]
 
 dev_require = [
