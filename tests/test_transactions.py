@@ -10,10 +10,6 @@ from bitcoinrpc.authproxy import AuthServiceProxy
 from pycoin.key.BIP32Node import BIP32Node
 
 
-alice = 'n12nZmfTbDGCT3VJF5QhPhyVGXvXPzQkFW'
-bob = 'mgaUVCq15uywYsqv7dVM4vxVAkq37c44aW'
-
-
 @pytest.mark.parametrize('srv,srv_mod_name,srv_cls_name,is_testnet', [
     ('blockr', 'blockrservice', 'BitcoinBlockrService', False),
     ('daemon', 'daemonservice', 'BitcoinDaemonService', False),
@@ -105,7 +101,7 @@ def test_create_sign_push_transaction(rpcuser,
 
 @pytest.mark.skipif(os.environ.get('TRAVIS') == 'true',
                     reason='sslv3 alert handshake failure')
-def test_transaction_creation_via_simple_transaction_with_blockr():
+def test_transaction_creation_via_simple_transaction_with_blockr(alice, bob):
     from transactions import Transactions
     trxs = Transactions(testnet=True)
     assert trxs.testnet is True
@@ -115,7 +111,7 @@ def test_transaction_creation_via_simple_transaction_with_blockr():
 
 @pytest.mark.skipif(os.environ.get('TRAVIS') == 'true',
                     reason='sslv3 alert handshake failure')
-def test_transaction_creation_via_create_with_blockr():
+def test_transaction_creation_via_create_with_blockr(alice, bob):
     from transactions import Transactions
     trxs = Transactions(testnet=True)
     assert trxs.testnet is True
