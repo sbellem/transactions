@@ -1,6 +1,8 @@
+# -*- coding: utf-8 -*-
 """
 Custom exceptions
 """
+from __future__ import unicode_literals
 
 
 class TransactionNotFound(Exception):
