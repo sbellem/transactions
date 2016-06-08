@@ -3,8 +3,9 @@
 from __future__ import absolute_import, division, unicode_literals
 from builtins import object
 
-import bitcoin
+import codecs
 
+import bitcoin
 from pycoin.key.BIP32Node import BIP32Node
 from pycoin.encoding import EncodingError
 
@@ -193,7 +194,12 @@ class Transactions(object):
         return inputs, change
 
     def _op_return_hex(self, op_return):
-        return "6a%x%s" % (len(op_return), op_return.encode('hex'))
+        try:
+            hex_op_return = codecs.encode(op_return, 'hex')
+        except TypeError:
+            hex_op_return = codecs.encode(op_return.encode('utf-8'), 'hex')
+
+        return "6a%x%s" % (len(op_return), hex_op_return.decode('utf-8'))
 
     def estimate_fee(self, n_inputs, n_outputs):
         # estimates transaction fee based on number of inputs and outputs

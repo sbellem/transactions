@@ -141,7 +141,7 @@ def test_push_tx(alice, bob, alice_secret, blockr):
     from transactions import Transactions
     transactions = Transactions(testnet=True)
     raw_tx = transactions.create(alice, (bob, 1), min_confirmations=1)
-    signed_tx = transactions.sign(raw_tx, alice_secret.encode('utf-8'))
+    signed_tx = transactions.sign(raw_tx, alice_secret)
     txid = blockr.push_tx(signed_tx)
     assert txid
 
@@ -198,4 +198,4 @@ def test_get_block_raw(blockr, block_hash):
 def test_unsuccessful_make_request(blockr):
     with pytest.raises(Exception) as exc:
         blockr.make_request('https://tbtc.blockr.io/api/v1/tx/info/dummy-tx')
-    assert exc.value.message == 'code: 404 message: No records found'
+    assert exc.value.args[0] == 'code: 404 message: No records found'

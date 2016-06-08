@@ -155,8 +155,9 @@ class BitcoinDaemonService(BitcoinService):
             return [vout['scriptPubKey']['addresses'][0] for vout in raw_tx['vout'] if vout['n'] == vout_n][0]
         # TODO: Define exceptions for the daemon error messages
         # Coinbase transaction?
+        # TODO review
         except Exception as e:
-            if e.message == {u'message': u'No information available about transaction', u'code': -5}:
+            if e.args and e.args[0] == {u'message': u'No information available about transaction', u'code': -5}:
                 return ''
             else:
                 raise
@@ -167,8 +168,9 @@ class BitcoinDaemonService(BitcoinService):
             return [vout['value'] for vout in raw_tx['vout'] if vout['n'] == vout_n][0]
         # TODO: Define exceptions for the daemon error messages
         # Coinbase transaction?
+        # TODO review
         except Exception as e:
-            if e.message == {u'message': u'No information available about transaction', u'code': -5}:
+            if e.args and e.args[0] == {'message': 'No information available about transaction', 'code': -5}:
                 return 0
             else:
                 raise
