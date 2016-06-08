@@ -156,11 +156,12 @@ class Transactions(object):
         """
         netcode = 'XTN' if self.testnet else 'BTC'
 
+        # TODO review
         # check if its a wif
         try:
             BIP32Node.from_text(master_password)
             return bitcoin.signall(tx, master_password)
-        except EncodingError:
+        except (AttributeError, EncodingError):
             # if its not get the wif from the master secret
             return bitcoin.signall(tx, BIP32Node.from_master_secret(master_password, netcode=netcode).subkey_for_path(path).wif())
 
