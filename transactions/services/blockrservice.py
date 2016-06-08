@@ -3,7 +3,6 @@
 from __future__ import absolute_import, division, unicode_literals
 from builtins import str
 
-import json
 import bitcoin
 import requests
 import time
@@ -31,7 +30,7 @@ class BitcoinBlockrService(BitcoinService):
 
     def make_request(self, url, params=None):
         response = requests.get(url)
-        data = json.loads(response.content)
+        data = response.json()
         if data.get('status') != 'success':
             raise Exception("code: {} message: {}".format(data['code'],
                                                           data['message']))

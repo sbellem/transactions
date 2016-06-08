@@ -36,7 +36,7 @@ class BitcoinDaemonService(BitcoinService):
             verify=False,
             timeout=30,
         )
-        return json.loads(response.content)
+        return response.json()
 
     def get_block_raw(self, block_hash):
         return self.make_request('getblock', (block_hash,))
