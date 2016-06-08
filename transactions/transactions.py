@@ -1,10 +1,15 @@
+# -*- coding: utf-8 -*-
+
+from __future__ import absolute_import, division, unicode_literals
+from builtins import object
+
 import bitcoin
 
 from pycoin.key.BIP32Node import BIP32Node
 from pycoin.encoding import EncodingError
 
-from services.daemonservice import BitcoinDaemonService, RegtestDaemonService
-from services.blockrservice import BitcoinBlockrService
+from .services.daemonservice import BitcoinDaemonService, RegtestDaemonService
+from .services.blockrservice import BitcoinBlockrService
 
 
 SERVICES = ['daemon', 'blockr', 'regtest']
@@ -192,7 +197,7 @@ class Transactions(object):
     def estimate_fee(self, n_inputs, n_outputs):
         # estimates transaction fee based on number of inputs and outputs
         estimated_size = 10 + 148 * n_inputs + 34 * n_outputs
-        return (estimated_size / 1000 + 1) * self._min_tx_fee
+        return (estimated_size // 1000 + 1) * self._min_tx_fee
 
     def decode(self, tx):
         """

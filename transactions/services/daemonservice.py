@@ -1,10 +1,14 @@
+# -*- coding: utf-8 -*-
 """
 Bitcoin Daemon Service
+
 """
+from __future__ import absolute_import, division, unicode_literals
+
 import json
 import requests
 
-from transactions.services.service import BitcoinService
+from .service import BitcoinService
 from transactions.utils import bitcoin_to_satoshi
 
 

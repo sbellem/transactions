@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
-from __future__ import unicode_literals
+from __future__ import absolute_import, division, unicode_literals
+from builtins import str
 
 import json
 import bitcoin
@@ -8,7 +9,7 @@ import requests
 import time
 from datetime import datetime
 
-from transactions.services.service import BitcoinService
+from .service import BitcoinService
 from transactions.utils import bitcoin_to_satoshi
 
 """
@@ -127,7 +128,7 @@ class BitcoinBlockrService(BitcoinService):
 
     def get_balance(self, addresses, confirmations=None):
         # TODO review
-        if not isinstance(addresses, basestring):
+        if not isinstance(addresses, str):
             addresses = ','.join(addresses)
         url = '{}/address/balance/{}'.format(self._url, addresses)
         # TODO add support for confirmations
