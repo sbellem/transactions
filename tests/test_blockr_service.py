@@ -141,7 +141,7 @@ def test_push_tx(alice, bob, alice_secret, blockr):
     from transactions import Transactions
     transactions = Transactions(testnet=True)
     raw_tx = transactions.create(alice, (bob, 1), min_confirmations=1)
-    signed_tx = transactions.sign(raw_tx, alice_secret)
+    signed_tx = transactions.sign(raw_tx, alice_secret.encode('utf-8'))
     txid = blockr.push_tx(signed_tx)
     assert txid
 
